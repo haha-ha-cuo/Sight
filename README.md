@@ -2,7 +2,7 @@
 
 Vue 3 + Vite 前端与 Python Flask 后端的 RSS 资讯原型。后端使用 uv 管理依赖，通过 AgentScope 2.x 调用 DeepSeek 生成中文摘要。
 
-当前已支持 RSS/Atom 采集、链接去重、订阅摘要／AI 摘要、页面搜索与 Markdown 导出。无需数据库即可运行；本次结果仅在请求和当前页面中保留，刷新后清空。
+当前已支持 RSS/Atom 采集、链接去重、订阅摘要／AI 摘要、页面搜索与 Markdown 导出。现已加入注册登录、个人 Agent 配置、对话历史、RSS 订阅和阅读记录，登录后的业务数据存入 MySQL。匿名阅读仍可使用，不保存结果。
 
 ## 目录结构
 
@@ -19,12 +19,14 @@ Sight/
 │   ├── api/rss.py            # RSS 配置与摘要接口
 │   ├── tests/                # RSS、API 与 Agent 工具调用测试
 │   ├── Makefile              # format / lint / test / check
-│   ├── db.py                 # MySQL 连接方法
+│   ├── database/             # 业务对象模型与 SQLAlchemy 存储
+│   ├── db.py                 # MySQL 健康检查连接方法
 │   ├── .env.example          # 本地环境变量示例
 │   ├── .python-version       # 默认 Python 3.12
 │   ├── pyproject.toml        # Python 项目和依赖声明
 │   ├── uv.lock               # Python 依赖锁文件
 │   └── .venv/                # uv 创建的虚拟环境，不提交版本控制
+├── scripts/                  # 数据库初始化脚本
 └── docs/                     # 项目文档
 ```
 
@@ -32,7 +34,7 @@ Sight/
 
 - Node.js 22.12+（或 20.19+）及 npm。
 - [uv](https://docs.astral.sh/uv/getting-started/installation/)。项目默认使用 Python 3.12；本机没有对应解释器时，uv 可自动下载。
-- MySQL 仅供可选的 `/api/health/db` 检查使用；RSS 原型无需启动或配置数据库。
+- MySQL：账号及个人数据功能需要数据库；匿名 RSS 阅读仍可独立使用。
 
 ## 启动后端
 
@@ -41,7 +43,9 @@ Sight/
 ```bash
 cd backend
 uv sync --locked
-cp .env.example .env
+cp -n .env.example .env
+# 配置 MySQL 后创建数据库和表
+uv run python ../scripts/init_db.py
 ```
 
 默认使用订阅摘要，可直接启动。启用 DeepSeek AI 中文摘要时，在 `backend/.env` 中配置：
@@ -97,9 +101,15 @@ AI 摘要基于订阅中提供的标题和摘要，不抓取文章全文；失�
 
 开发时，Vite 将 `/api` 请求代理到 `http://127.0.0.1:5001`。修改后端端口时，需要同步修改 `frontend/vite.config.js` 中的代理地址。
 
-## MySQL 配置与验证（可选）
+## MySQL 配置与初始化
 
-使用已有 MySQL 账号登录，创建数据库：
+先设置 `backend/.env` 中的 MySQL 配置。当前本地使用 root、空密码。推荐在项目根目录通过脚本建库建表：
+
+```bash
+uv run --project backend python scripts/init_db.py
+```
+
+脚本可重复执行，创建缺少的数据库和 6 张业务表，保留已有数据。详见 [脚本说明](scripts/README.md) 与 [对象模型说明](backend/database/info.md)。如需手动建库，可使用：
 
 ```bash
 mysql -u root -p
@@ -121,7 +131,7 @@ curl http://127.0.0.1:5001/api/health
 curl http://127.0.0.1:5001/api/health/db
 ```
 
-连接成功返回 HTTP 200 和 `status: "ok"`；数据库不可用或配置错误时，数据库检查返回 HTTP 503。该项目只提供连接示例，尚未创建业务数据表。
+连接成功返回 HTTP 200 和 `status: "ok"`；数据库不可用或配置错误时，数据库检查返回 HTTP 503。业务表包括 users、agent_profiles、conversations、messages、rss_sources 和 digest_records。
 
 ## 常用命令
 
@@ -150,3 +160,7 @@ make check
 Vite 的 `/api` 代理仅用于开发服务器。部署 `frontend/dist` 或使用 `npm run preview` 时，需要另行配置 `/api` 到 Flask 的反向代理。请提交 `package-lock.json` 和 `uv.lock`，不要提交 `.venv`、`node_modules` 或包含真实密码的 `.env`。
 
 初始化方式参考 [Vite 文档](https://vite.dev/guide/)、[uv 项目管理文档](https://docs.astral.sh/uv/guides/projects/) 和 [PyMySQL 安装说明](https://pymysql.readthedocs.io/en/latest/user/installation.html)。
+
+## 个人工作台
+
+右上角注册或登录后，可管理自己的 Agent、发起对话并恢复历史、保存 RSS 订阅，以及重新打开生成过的阅读清单。注册会创建默认资讯助手；模型密钥仍使用后端配置。密码仅保存哈希值，用户之间的数据隔离。当前为本机运行原型，暂不包含密码找回、邮件验证或定时调度。

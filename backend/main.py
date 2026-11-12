@@ -4,18 +4,26 @@ from pathlib import Path
 import pymysql
 from dotenv import load_dotenv
 from flask import Flask, jsonify
+from werkzeug.exceptions import HTTPException
 
+from api.accounts import init_accounts
 from api.rss import rss_api
+from api.workspace import workspace_api
+from database.store import init_store
 from db import get_connection
 
 
-def create_app() -> Flask:
+def create_app(test_config: dict | None = None) -> Flask:
     load_dotenv(Path(__file__).with_name(".env"))
     provider = os.getenv("SIGHT_PROVIDER", "deepseek").strip().lower()
     app = Flask(__name__)
     app.json.ensure_ascii = False
     app.config.from_mapping(
-        MAX_CONTENT_LENGTH=16 * 1024,
+        MAX_CONTENT_LENGTH=64 * 1024,
+        SECRET_KEY=os.getenv("SIGHT_SECRET_KEY"),
+        DATABASE_URL=None,
+        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_SAMESITE="Lax",
         SIGHT_PROVIDER=provider,
         DEEPSEEK_API_KEY=os.getenv("DEEPSEEK_API_KEY", "").strip(),
         DASHSCOPE_API_KEY=os.getenv("DASHSCOPE_API_KEY", "").strip(),
@@ -28,7 +36,16 @@ def create_app() -> Flask:
         MYSQL_PASSWORD=os.getenv("MYSQL_PASSWORD", ""),
         MYSQL_DATABASE=os.getenv("MYSQL_DATABASE", "sight"),
     )
+    if test_config:
+        app.config.update(test_config)
+    init_store(app)
+    init_accounts(app)
     app.register_blueprint(rss_api)
+    app.register_blueprint(workspace_api)
+
+    @app.errorhandler(HTTPException)
+    def http_error(error):
+        return jsonify(message=error.description), error.code
 
     @app.get("/api/health")
     def health():

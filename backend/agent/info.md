@@ -7,4 +7,4 @@
 
 采集在 `tools.py` 完成；`read_rss_articles` 工具仅返回本次请求已采集的文章，不能请求模型自行指定的 URL。`service.py` 调用 `agent.reply(..., structured_schema=DigestSummary)`，读取 `reply.structured_output`，校验文章 ID 集合后将摘要合并回原始文章；标题、链接和来源始终使用采集结果。
 
-每个请求创建独立的 Agent 状态，不接数据库或持久化存储。
+RSS 和聊天请求均创建独立 Agent 状态。`agent/chat.py` 根据当前会话的模型快照与最近的普通文本历史调用 AgentScope 2.x；会话和消息由业务层存入 MySQL，不序列化可执行工具状态。

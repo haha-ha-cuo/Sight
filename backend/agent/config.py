@@ -24,7 +24,7 @@ def ai_available(config: dict) -> bool:
     return bool(config.get(PROVIDER_KEYS.get(config["SIGHT_PROVIDER"], "")))
 
 
-def create_rss_agent(config: dict, articles: list[Article]) -> Agent:
+def create_model(config: dict):
     if config["SIGHT_PROVIDER"] == "deepseek":
         model = DeepSeekChatModel(
             credential=DeepSeekCredential(api_key=config["DEEPSEEK_API_KEY"]),
@@ -45,10 +45,14 @@ def create_rss_agent(config: dict, articles: list[Article]) -> Agent:
         )
     else:
         raise ValueError("SIGHT_PROVIDER 仅支持 deepseek 或 dashscope")
+    return model
+
+
+def create_rss_agent(config: dict, articles: list[Article]) -> Agent:
     return Agent(
         name="SightRSS",
-        system_prompt=SYSTEM_PROMPT,
-        model=model,
+        system_prompt=SYSTEM_PROMPT + "\n用户阅读偏好：" + config.get("SIGHT_INSTRUCTIONS", ""),
+        model=create_model(config),
         toolkit=Toolkit(tools=[rss_tool(articles)]),
         react_config=ReActConfig(
             max_iters=4,

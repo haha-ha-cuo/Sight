@@ -10,6 +10,7 @@ dependencies = [
     "httpx>=0.28,<1",
     "pymysql[rsa]>=1.2.4",
     "python-dotenv>=1.2.4",
+    "sqlalchemy>=2.0,<3",
 ]
 
 [dependency-groups]

@@ -41,9 +41,6 @@
         <mxCell id="deepseek" value="DeepSeek API" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
           <mxGeometry x="930" y="335" width="190" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="scope" value="当前阶段不接入业务数据库" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;strokeColor=none;fillColor=none;fontSize=14;">
-          <mxGeometry x="370" y="450" width="450" height="30" as="geometry" />
-        </mxCell>
         <mxCell id="browser-api" source="browser-app" target="api" value="HTTP / JSON" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -67,6 +64,12 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="agent-model" source="agent" target="deepseek" value="HTTPS" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="database" value="MySQL" vertex="1" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;strokeWidth=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;">
+          <mxGeometry x="400" y="350" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="api-database" source="api" target="database" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

@@ -9,7 +9,7 @@
 <item><title>让 Agent 只处理本次采集的内容</title>
 <link>https://example.com/sight/agent</link>
 <description>这是演示数据。摘要助手通过只读工具获取本次请求中的文章，按结构化格式返回中文摘要。未配置模型密钥时，页面直接展示订阅摘要。</description></item>
-<item><title>先跑通阅读体验，再扩展存储能力</title>
+<item><title>从阅读清单，延伸到个人工作台</title>
 <link>https://example.com/sight/prototype</link>
-<description>这是演示数据。第一阶段聚焦采集、摘要和阅读。结果只存在当前请求和浏览器页面中，刷新后清空，暂不写入数据库。</description></item>
+<description>这是演示数据。原型支持个人 Agent、对话历史、RSS 订阅和阅读记录。登录后生成的清单保存到 MySQL，刷新或重新登录后可从阅读记录打开；匿名预览仅保留在当前页面。</description></item>
 </channel></rss>
