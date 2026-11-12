@@ -8,6 +8,7 @@ import re
 import socket
 from datetime import UTC, datetime
 from html.parser import HTMLParser
+from typing import Any
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 import feedparser
@@ -19,6 +20,7 @@ from agentscope.tool import FunctionTool, ToolResponse
 from agent.models import Article
 
 MAX_FEED_BYTES = 2 * 1024 * 1024
+FAKE_IP_NETWORK = ipaddress.ip_network("198.18.0.0/15")
 PRESET_SOURCES = [
     {"name": "少数派", "url": "https://sspai.com/feed"},
     {"name": "阮一峰的网络日志", "url": "https://www.ruanyifeng.com/blog/atom.xml"},
@@ -55,7 +57,7 @@ def plain_text(value: str, max_length: int = 1600) -> str:
     return re.sub(r"\s+", " ", " ".join(parser.parts)).strip()[:max_length]
 
 
-def normalize_url(value: str) -> str:
+def normalize_url(value: str) -> bytes | Any:
     """只接受不带认证信息的 HTTP(S) URL，并去掉片段用于去重。"""
     try:
         parts = urlsplit(value.strip())
@@ -78,20 +80,28 @@ def normalize_url(value: str) -> str:
 async def _require_public_host(url: str) -> None:
     parts = urlsplit(url)
     try:
+        ipaddress.ip_address(parts.hostname)
+        is_hostname = False
+    except ValueError:
+        is_hostname = True
+    try:
         addresses = await asyncio.to_thread(
             socket.getaddrinfo, parts.hostname, parts.port or 443, type=socket.SOCK_STREAM
         )
     except OSError as exc:
         raise FeedError("无法解析信息源域名") from exc
-    if not addresses or any(
-        not ipaddress.ip_address(address[4][0]).is_global for address in addresses
+    # 本机透明代理的 Fake-IP DNS 会把公开域名解析到此保留网段。
+    # 仅对域名解析结果兼容该网段，直接输入保留 IP 仍然拒绝。
+    ips = [ipaddress.ip_address(address[4][0]) for address in addresses]
+    if not ips or any(
+        not ip.is_global and not (is_hostname and ip in FAKE_IP_NETWORK) for ip in ips
     ):
         raise FeedError("仅支持公网信息源，不能访问本机或内网地址")
 
 
 def parse_feed(content: bytes, source_url: str, limit: int) -> tuple[str, list[Article]]:
     # RSS 不需要 DTD；拒绝实体声明，避免恶意 XML。
-    if re.search(br"<!\s*(?:DOCTYPE|ENTITY)\b", content, re.IGNORECASE):
+    if re.search(rb"<!\s*(?:DOCTYPE|ENTITY)\b", content, re.IGNORECASE):
         raise FeedError("信息源含不支持的 XML 实体声明")
     feed = feedparser.parse(content)
     if not feed.version or feed.bozo:
@@ -115,7 +125,9 @@ def parse_feed(content: bytes, source_url: str, limit: int) -> tuple[str, list[A
                 title=plain_text(entry.get("title", ""), 300) or "无标题",
                 url=url,
                 source=source_name,
-                published_at=(datetime(*published[:6], tzinfo=UTC).isoformat() if published else None),
+                published_at=(
+                    datetime(*published[:6], tzinfo=UTC).isoformat() if published else None
+                ),
                 feed_summary=summary,
                 summary=summary or "该订阅条目未提供摘要，请查看原文。",
             )
@@ -163,11 +175,15 @@ def rss_tool(articles: list[Article]) -> FunctionTool:
     async def read_rss_articles() -> ToolResponse:
         """读取本次请求采集的 RSS 文章，包含 ID、标题、原文链接和订阅摘要。"""
         return ToolResponse(
-            content=[TextBlock(text=json.dumps([a.to_dict() for a in articles], ensure_ascii=False))]
+            content=[
+                TextBlock(text=json.dumps([a.to_dict() for a in articles], ensure_ascii=False))
+            ]
         )
 
     return FunctionTool(
         read_rss_articles,
         is_read_only=True,
-        permission=PermissionDecision(behavior=PermissionBehavior.ALLOW),
+        permission=PermissionDecision(
+            behavior=PermissionBehavior.ALLOW, message="只读取本次请求已采集的 RSS 数据"
+        ),
     )

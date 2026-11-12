@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="Electron" type="device">
+  <diagram id="sight-bs-prototype" name="B-S 架构">
+    <mxGraphModel dx="1160" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1160" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Sight 系统 B/S 架构图" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;">
+          <mxGeometry x="40" y="25" width="1080" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="browser-boundary" value="" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;dashed=1;fillColor=none;">
+          <mxGeometry x="40" y="110" width="250" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="server-boundary" value="" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;dashed=1;fillColor=none;">
+          <mxGeometry x="370" y="110" width="450" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="browser-header" value="B / 浏览器" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;strokeColor=none;fillColor=none;fontSize=20;">
+          <mxGeometry x="60" y="125" width="210" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="server-header" value="S / 服务器" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;strokeColor=none;fillColor=none;fontSize=20;">
+          <mxGeometry x="390" y="125" width="410" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="external-header" value="外部服务" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;strokeColor=none;fillColor=none;fontSize=20;">
+          <mxGeometry x="910" y="125" width="210" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="browser-app" value="Vue 3&lt;br&gt;前端页面" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
+          <mxGeometry x="70" y="240" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="api" value="Flask API&lt;br&gt;业务编排" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
+          <mxGeometry x="400" y="240" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rss" value="RSS 采集" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
+          <mxGeometry x="610" y="185" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="agent" value="AgentScope 2.x&lt;br&gt;摘要处理" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
+          <mxGeometry x="610" y="335" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="feeds" value="RSS / Atom&lt;br&gt;信息源" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
+          <mxGeometry x="930" y="185" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="deepseek" value="DeepSeek API" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;">
+          <mxGeometry x="930" y="335" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="scope" value="当前阶段不接入业务数据库" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#000000;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1;shadow=0;strokeColor=none;fillColor=none;fontSize=14;">
+          <mxGeometry x="370" y="450" width="450" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="browser-api" source="browser-app" target="api" value="HTTP / JSON" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="api-rss" source="api" target="rss" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.3;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="585" y="264" />
+              <mxPoint x="585" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="api-agent" source="api" target="agent" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.7;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="585" y="296" />
+              <mxPoint x="585" y="365" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rss-feeds" source="rss" target="feeds" value="HTTPS" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="agent-model" source="agent" target="deepseek" value="HTTPS" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=13;fontColor=#000000;labelBackgroundColor=#ffffff;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

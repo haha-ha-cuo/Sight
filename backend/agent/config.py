@@ -1,8 +1,8 @@
 """AgentScope 2.x 模型和 Agent 工厂；不创建会话存储。"""
 
 from agentscope.agent import Agent, ReActConfig
-from agentscope.credential import DashScopeCredential
-from agentscope.model import DashScopeChatModel
+from agentscope.credential import DashScopeCredential, DeepSeekCredential
+from agentscope.model import DashScopeChatModel, DeepSeekChatModel
 from agentscope.tool import Toolkit
 
 from agent.models import Article
@@ -17,17 +17,38 @@ SYSTEM_PROMPT = """你是 Sight 的中文资讯摘要助手。
 """
 
 
+PROVIDER_KEYS = {"dashscope": "DASHSCOPE_API_KEY", "deepseek": "DEEPSEEK_API_KEY"}
+
+
+def ai_available(config: dict) -> bool:
+    return bool(config.get(PROVIDER_KEYS.get(config["SIGHT_PROVIDER"], "")))
+
+
 def create_rss_agent(config: dict, articles: list[Article]) -> Agent:
-    return Agent(
-        name="SightRSS",
-        system_prompt=SYSTEM_PROMPT,
-        model=DashScopeChatModel(
+    if config["SIGHT_PROVIDER"] == "deepseek":
+        model = DeepSeekChatModel(
+            credential=DeepSeekCredential(api_key=config["DEEPSEEK_API_KEY"]),
+            model=config["SIGHT_MODEL"],
+            parameters=DeepSeekChatModel.Parameters(temperature=0.2, max_tokens=6000),
+            stream=False,
+            max_retries=1,
+            client_kwargs={"timeout": 40},
+        )
+    elif config["SIGHT_PROVIDER"] == "dashscope":
+        model = DashScopeChatModel(
             credential=DashScopeCredential(api_key=config["DASHSCOPE_API_KEY"]),
             model=config["SIGHT_MODEL"],
             parameters=DashScopeChatModel.Parameters(temperature=0.2, max_tokens=6000),
             stream=False,
             max_retries=1,
-        ),
+            client_kwargs={"timeout": 40},
+        )
+    else:
+        raise ValueError("SIGHT_PROVIDER 仅支持 deepseek 或 dashscope")
+    return Agent(
+        name="SightRSS",
+        system_prompt=SYSTEM_PROMPT,
+        model=model,
         toolkit=Toolkit(tools=[rss_tool(articles)]),
         react_config=ReActConfig(
             max_iters=4,

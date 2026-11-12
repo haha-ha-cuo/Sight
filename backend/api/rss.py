@@ -3,6 +3,7 @@ import asyncio
 from flask import Blueprint, current_app, jsonify, request
 from werkzeug.exceptions import BadRequest, UnsupportedMediaType
 
+from agent.config import PROVIDER_KEYS, ai_available
 from agent.service import generate_digest
 from agent.tools import PRESET_SOURCES, FeedError, normalize_url
 
@@ -13,7 +14,8 @@ rss_api = Blueprint("rss", __name__)
 def rss_config():
     return jsonify(
         sources=PRESET_SOURCES,
-        ai_available=bool(current_app.config["DASHSCOPE_API_KEY"]),
+        ai_available=ai_available(current_app.config),
+        provider=current_app.config["SIGHT_PROVIDER"],
         model=current_app.config["SIGHT_MODEL"],
         max_sources=5,
         max_articles=20,
@@ -49,12 +51,16 @@ def create_digest():
         urls = list(dict.fromkeys(normalize_url(url) for url in urls))
     except FeedError as exc:
         return jsonify(message=str(exc)), 400
-    if mode == "ai" and not current_app.config["DASHSCOPE_API_KEY"]:
-        return jsonify(message="AI 摘要尚未配置，请设置 DASHSCOPE_API_KEY 或使用订阅摘要模式"), 503
-    try:
-        result = asyncio.run(
-            generate_digest(urls, limit, mode, demo, dict(current_app.config))
+    if mode == "ai" and not ai_available(current_app.config):
+        key = PROVIDER_KEYS.get(current_app.config["SIGHT_PROVIDER"])
+        message = (
+            f"AI 摘要尚未配置，请设置 {key} 或使用订阅摘要模式"
+            if key
+            else "SIGHT_PROVIDER 仅支持 deepseek 或 dashscope"
         )
+        return jsonify(message=message), 503
+    try:
+        result = asyncio.run(generate_digest(urls, limit, mode, demo, dict(current_app.config)))
     except FeedError as exc:
         return jsonify(message=str(exc)), 502
     return jsonify(result)
