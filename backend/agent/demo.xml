@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>Sight 示例订阅 · 非实时新闻</title>
+<link>https://example.com/</link>
+<description>用于本地演示的虚构条目</description>
+<item><title>从 RSS 开始，搭建自己的资讯阅读台</title>
+<link>https://example.com/sight/rss</link>
+<description>这是演示数据。RSS 提供标题、链接和订阅摘要，适合先验证资讯采集和展示链路。本原型支持多个信息源，并按原文链接去重。</description></item>
+<item><title>让 Agent 只处理本次采集的内容</title>
+<link>https://example.com/sight/agent</link>
+<description>这是演示数据。摘要助手通过只读工具获取本次请求中的文章，按结构化格式返回中文摘要。未配置模型密钥时，页面直接展示订阅摘要。</description></item>
+<item><title>先跑通阅读体验，再扩展存储能力</title>
+<link>https://example.com/sight/prototype</link>
+<description>这是演示数据。第一阶段聚焦采集、摘要和阅读。结果只存在当前请求和浏览器页面中，刷新后清空，暂不写入数据库。</description></item>
+</channel></rss>
