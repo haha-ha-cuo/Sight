@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="Electron" type="device">
+  <diagram name="系统用例" id="系统用例">
+    <mxGraphModel dx="1450" dy="1040" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="1450" pageHeight="1040" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Sight 系统用例图" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;strokeColor=none;fillColor=none;fontSize=28;">
+          <mxGeometry x="30" y="25" width="1390" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="boundary" value="" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;fillColor=none;">
+          <mxGeometry x="230" y="110" width="960" height="830" as="geometry" />
+        </mxCell>
+        <mxCell id="system" value="Sight 资讯阅读平台" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;strokeColor=none;fillColor=none;fontSize=22;">
+          <mxGeometry x="250" y="125" width="920" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="用户" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;">
+          <mxGeometry x="80" y="450" width="55" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="feed" value="RSS / Atom 信息源" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=170;">
+          <mxGeometry x="1300" y="410" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="model" value="大模型服务" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;labelWidth=170;">
+          <mxGeometry x="1300" y="670" width="60" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="auth" value="注册 / 登录 / 退出" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="190" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="profiles" value="管理 Agent 配置" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="290" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="sources" value="管理 RSS 订阅" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="390" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="digest" value="生成阅读清单" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="510" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="chat" value="与 Agent 对话" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="650" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="history" value="管理对话历史" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="760" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="records" value="查看 / 删除阅读记录" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="310" y="860" width="250" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="collect" value="采集 RSS 内容" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="810" y="420" width="270" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="analyze" value="按偏好筛选并生成摘要" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="810" y="540" width="270" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="export" value="导出阅读清单" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;ellipse;">
+          <mxGeometry x="810" y="850" width="270" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="user-auth" source="user" target="auth" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user-profiles" source="user" target="profiles" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user-sources" source="user" target="sources" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user-digest" source="user" target="digest" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user-chat" source="user" target="chat" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user-history" source="user" target="history" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="user-records" source="user" target="records" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;edgeStyle=none;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="digest-collect" source="digest" target="collect" value="«include»" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=1;exitY=0.25;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="526" />
+              <mxPoint x="680" y="452" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ai-extend" source="analyze" target="digest" value="«extend»&lt;br&gt;[选择 AI 模式]" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0;exitY=0.5;entryX=1;entryY=0.75;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="572" />
+              <mxPoint x="700" y="558" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="feed-collect" source="feed" target="collect" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;exitX=0;exitY=0.5;entryX=1;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="model-ai" source="model" target="analyze" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;exitX=0;exitY=0.3;entryX=1;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1230" y="700" />
+              <mxPoint x="1230" y="572" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="model-chat" source="model" target="chat" value="" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;startArrow=none;endArrow=none;exitX=0;exitY=0.7;entryX=1;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1205" y="740" />
+              <mxPoint x="740" y="740" />
+              <mxPoint x="740" y="682" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="export-extend" source="export" target="records" value="«extend»&lt;br&gt;[打开清单后导出]" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.2;fontFamily=Helvetica;fontSize=15;fontColor=#000000;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;endFill=0;exitX=0;exitY=0.5;entryX=1;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note1" value="登录前可生成临时清单；Agent / 订阅管理、对话与阅读记录功能以登录为前提。" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;strokeColor=none;fillColor=none;fontSize=16;">
+          <mxGeometry x="250" y="950" width="1100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="note2" value="目标设计：价值评分与筛选待实现；AI 不可用时可回退为订阅摘要。" vertex="1" parent="1" style="html=1;whiteSpace=wrap;strokeColor=#000000;fillColor=#ffffff;strokeWidth=1.3;fontFamily=Helvetica;fontColor=#000000;fontSize=18;strokeColor=none;fillColor=none;fontSize=16;">
+          <mxGeometry x="250" y="986" width="1100" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
